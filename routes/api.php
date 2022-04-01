@@ -57,6 +57,6 @@ Route::prefix('v1')->group(function () {
     });
 });
 
-Route::middleware(['cors'])->group(function () {
+// Route::middleware(['cors'])->group(function () {
     Route::get('buku/{judul}', 'BookController@cetak');
-});
+// });
