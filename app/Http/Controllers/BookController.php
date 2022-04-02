@@ -3,26 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Http\Resources\Book as BookResource;
+use App\Http\Resources\Books as BookCollectionResource;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::all();
-        foreach ($books as $book) {
-            echo $book->title;
-        }
-        // return $books;
+        $books = new BookCollectionResource(Book::get());
+        return $books;
     }
 
     public function view($id)
     {
-        $book = Book::where('status', 'PUBLISH')
-            ->orderBy('title', 'asc')
-            ->limit(10)
-            ->get();
+        $book = new BookResource(Book::find($id));
         return $book;
     }
 
