@@ -53,9 +53,7 @@ Route::get('book/{title}', function ($title) {
 Route::prefix('v1')->group(function () {
     Route::get('books', 'BookController@index');
     Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
-    Route::get('categories', function () {
-        // Match dengan "/v1/categories"
-    });
+    Route::resource('categories', 'CategoryController');
 });
 
 // Route::middleware(['cors'])->group(function () {
