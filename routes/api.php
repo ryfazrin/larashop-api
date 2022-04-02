@@ -1,5 +1,7 @@
 <?php
 
+use App\Book;
+use App\Http\Resources\Book as BookResource;
 use Illuminate\Http\Request;
 
 /*
@@ -59,3 +61,7 @@ Route::prefix('v1')->group(function () {
 // Route::middleware(['cors'])->group(function () {
 Route::get('buku/{judul}', 'BookController@cetak');
 // });
+
+Route::get('/book', function () {
+    return new BookResource(Book::find(1));
+});
