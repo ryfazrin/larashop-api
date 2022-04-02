@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -108,5 +109,14 @@ class Handler extends ExceptionHandler
             'data' => null,
             'errors' => $errors,
         ], $status_code);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Unauthenticate',
+            'data' => null
+        ], 401);
     }
 }
