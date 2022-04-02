@@ -52,7 +52,12 @@ class AuthController extends Controller
             'password' => 'required|string|min:6', // password minimal 6 karakter
         ]);
         if ($validator->fails()) { // fungsi untuk ngecek apakah validasi
-            // validasi gagal
+            $errors = $validator->errors();
+            return response()->json([
+                'data' => [
+                    'message' => $errors,
+                ]
+            ], 400);
         } else {
             // validasi sukses
         }
