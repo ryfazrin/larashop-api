@@ -10,7 +10,7 @@ class BookController extends Controller
 {
     public function index()
     {
-        $books = new BookCollectionResource(Book::get());
+        $books = new BookCollectionResource(Book::paginate(5));
         return $books;
     }
 
@@ -18,10 +18,5 @@ class BookController extends Controller
     {
         $book = new BookResource(Book::find($id));
         return $book;
-    }
-
-    public function cetak($judul)
-    {
-        return $judul;
     }
 }
