@@ -10,6 +10,10 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
         $user = User::where('email', '=', $request->email)->firstOrfail();
         $status = "error";
         $message = "";
