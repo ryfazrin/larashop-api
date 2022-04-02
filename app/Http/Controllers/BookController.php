@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = DB::table('books')->get();
-        return $books;
+        $books = Book::all();
+        foreach ($books as $book) {
+            echo $book->title;
+        }
+        // return $books;
     }
 
     public function view($id)
     {
-        $book = DB::table('books')->where('id', $id)->get();
+        $book = Book::where('status', 'PUBLISH')
+            ->orderBy('title', 'asc')
+            ->limit(10)
+            ->get();
         return $book;
     }
 
