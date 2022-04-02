@@ -19,6 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('v1')->group(function () {
+    Route::get('books', 'BookController@index');
+    Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
+    Route::resource('categories', 'CategoryController');
+});
+
+// --------------------------------
+
 Route::get('nama', function () {
     return 'Namaku, Larashop API';
 });
@@ -49,12 +57,6 @@ Route::get('book/{id}', function () {
 Route::get('book/{title}', function ($title) {
     return 'buku abjad';
 })->where('title', '[A-Za-z]+');
-
-Route::prefix('v1')->group(function () {
-    Route::get('books', 'BookController@index');
-    Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
-    Route::resource('categories', 'CategoryController');
-});
 
 // Route::middleware(['cors'])->group(function () {
 Route::get('buku/{judul}', 'BookController@cetak');
