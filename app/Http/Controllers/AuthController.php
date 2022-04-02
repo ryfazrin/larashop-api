@@ -51,16 +51,38 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users', // email harus unik pada table users
             'password' => 'required|string|min:6', // password minimal 6 karakter
         ]);
+
+        $status = "error";
+        $message = "";
+        $code = 400;
+
         if ($validator->fails()) { // fungsi untuk ngecek apakah validasi
             $errors = $validator->errors();
-            return response()->json([
-                'data' => [
-                    'message' => $errors,
-                ]
-            ], 400);
+            $message = $errors;
         } else {
-            // validasi sukses
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'roles' => json_encode(['CUSTOMER']),
+            ]);
+            if ($user) {
+                // Auth::login($users);
+                $user->generateToken();
+                $status = "success";
+                $message = "register successfully";
+                $data = $user->toArray();
+                $code = 200;
+            } else {
+                $message = 'register failed';
+            }
         }
+
+        return response()->json([
+            'status' => $status,
+            'message' => $message,
+            'data' => $data
+        ], $code);
     }
 
     public function logout(Request $request)
