@@ -22,7 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::get('books', 'BookController@index');
     Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
-    Route::resource('categories', 'CategoryController');
+    Route::apiResource('categories', 'CategoryController');
 });
 
 // --------------------------------
