@@ -28,7 +28,7 @@ Route::prefix('v1')->group(function () {
     Route::get('categories', 'CategoryController@index');
 
     Route::get('books/top/{count}', 'BookController@top');
-    // Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
+    Route::get('books', 'BookController@index');
     // Route::apiResource('categories', 'CategoryController');
 
     /**

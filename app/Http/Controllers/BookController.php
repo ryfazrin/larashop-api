@@ -8,6 +8,11 @@ use App\Http\Resources\Books as BookResourceCollection;
 
 class BookController extends Controller
 {
+    public function index()
+    {
+        $criteria = Book::paginate(6);
+        return new BookResourceCollection($criteria);
+    }
     public function top($count)
     {
         $criteria = Book::select('*')
