@@ -22,13 +22,12 @@ Route::prefix('v1')->group(function () {
      * public
      */
     Route::post('login', 'AuthController@login');
-
-    // tambahkan sekalian untuk register data logout :
     Route::post('register', 'AuthController@register');
 
-    Route::get('books', 'BookController@index');
-    Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
-    Route::apiResource('categories', 'CategoryController');
+    Route::get('categories/random/{count}', 'CategoryController@random');
+    // Route::get('books', 'BookController@index');
+    // Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
+    // Route::apiResource('categories', 'CategoryController');
 
     /**
      * private
