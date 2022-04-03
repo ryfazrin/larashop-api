@@ -3,20 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Book;
-use App\Http\Resources\Book as BookResource;
-use App\Http\Resources\Books as BookCollectionResource;
+use Illuminate\Http\Request;
+use App\Http\Resources\Books as BookResourceCollection;
 
 class BookController extends Controller
 {
-    public function index()
+    public function top($count)
     {
-        $books = new BookCollectionResource(Book::paginate(5));
-        return $books;
-    }
+        $criteria = Book::select('*')
+            ->orderBy('views', 'DESC')
+            ->limit($count)
+            ->get();
 
-    public function view($id)
-    {
-        $book = new BookResource(Book::find($id));
-        return $book;
+        return new BookResourceCollection($criteria);
     }
 }

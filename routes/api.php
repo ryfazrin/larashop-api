@@ -25,7 +25,7 @@ Route::prefix('v1')->group(function () {
     Route::post('register', 'AuthController@register');
 
     Route::get('categories/random/{count}', 'CategoryController@random');
-    // Route::get('books', 'BookController@index');
+    Route::get('books/top/{count}', 'BookController@top');
     // Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
     // Route::apiResource('categories', 'CategoryController');
 
