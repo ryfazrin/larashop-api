@@ -20,15 +20,24 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
+    /**
+     * public
+     */
     Route::post('login', 'AuthController@login');
 
     // tambahkan sekalian untuk register data logout :
     Route::post('register', 'AuthController@register');
-    Route::post('logout', 'AuthController@logout');
 
     Route::get('books', 'BookController@index');
     Route::get('book/{id}', 'BookController@view')->where('id', '[0-9]+');
     Route::apiResource('categories', 'CategoryController');
+
+    /**
+     * private
+     */
+    Route::middleware('auth:api')->group(function () {
+        Route::post('logout', 'AuthController@logout');
+    });
 });
 
 // --------------------------------
