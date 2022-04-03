@@ -8,6 +8,11 @@ use App\Http\Resources\Categories as CategoryResourceCollection;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        $criteria = Category::paginate(6);
+        return new CategoryResourceCollection($criteria);
+    }
     public function random($count)
     {
         $criteria = Category::select('*')
