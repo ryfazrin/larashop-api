@@ -28,6 +28,8 @@ class BookController extends Controller
     public function slug($slug)
     {
         $criteria = Book::where('slug', $slug)->first();
+        $criteria->views = $criteria->views + 1;
+        $criteria->save();
         return new BookResource($criteria);
     }
 }
