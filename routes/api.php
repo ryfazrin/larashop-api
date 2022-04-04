@@ -30,7 +30,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('books/top/{count}', 'BookController@top');
     Route::get('books', 'BookController@index');
-    // Route::apiResource('categories', 'CategoryController');
+    Route::get('books/slug/{slug}', 'BookController@slug');
 
     /**
      * private
