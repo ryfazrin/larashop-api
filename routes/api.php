@@ -31,6 +31,7 @@ Route::prefix('v1')->group(function () {
     Route::get('books/top/{count}', 'BookController@top');
     Route::get('books', 'BookController@index');
     Route::get('books/slug/{slug}', 'BookController@slug');
+    Route::get('books/search/{keyword}', 'BookController@search');
 
     /**
      * private
